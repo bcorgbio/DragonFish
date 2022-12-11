@@ -141,7 +141,6 @@ skull.pca %>%
 
 ***Figure 3. PCA analysis of Dragonfish Skulls***
 
-
 ## Comparative Analysis
 
 ::: {style="text-align: left"}
@@ -426,9 +425,9 @@ PIC analysis on fore- and hindwing PC1 showed significant correlation (R-squared
 
 Justin - File Formatting, Code, Methods
 
-James - 
+James -
 
-Chris - 
+Chris -
 
 John -
 
