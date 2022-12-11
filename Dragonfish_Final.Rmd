@@ -424,12 +424,12 @@ PIC analysis on fore- and hindwing PC1 showed significant correlation (R-squared
 
 # Author Contributions
 
-Tingwei - Discussion, Rmd Setup, preprocessing up to EFA, PCA revision, PIC for PC2
+Justin - File Formatting, Code, Methods
 
-Justin - Wing Tracing, PCA Analysis, Results, Discussion, Formatting
+James - 
 
-Liz - Introduction, Methods, Discussion, References
+Chris - 
 
-James - Introduction, Methods, Results, Formatting
+John -
 
 # References
