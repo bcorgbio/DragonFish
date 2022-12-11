@@ -144,7 +144,7 @@ skull.pca %>%
 ## Comparative Analysis
 
 ::: {style="text-align: left"}
-After acquiring the PCA data, the phylogenetic tree of Lepidoptera was filtered to only include the species that were included in this study.
+After acquiring the PCA data, the phylogenetic tree of stomidoptera was filtered to only include the species that were included in this study.
 :::
 
 <center>
@@ -153,130 +153,97 @@ After acquiring the PCA data, the phylogenetic tree of Lepidoptera was filtered 
 
 stom.tree <- ape::read.tree("stomiidae.tre")
 
-plot(lep.tree,cex=0.1)
+plot(stom.tree,cex=0.1)
 
 ```
 
 ```{r, echo=FALSE, results='hide'}
-lep.tree <- ladderize(lep.tree)
-plot(lep.tree,cex=0.1)
+stom.tree <- ladderize(stom.tree)
+plot(stom.tree,cex=0.1)
 
-lep.tree$tip.label <- gsub("_"," ",lep.tree$tip.label)
+stom.tree$tip.label <- gsub("_"," ",stom.tree$tip.label)
 basename(names(outs))[1:5]
-lep.sp <- read_csv("lep_image_data.csv")
-head(lep.sp)
-head(lep.sp$identifier)
+stom.sp <- read_csv("stom_image_data.csv")
+head(stom.sp)
+head(stom.sp$identifier)
 
 #
 out.data <- tibble(xy.file=basename(names(outs))) %>% 
-  mutate(identifier=gsub("XY_|_hindwing|_forewing|.txt","",xy.file)) %>% 
-  left_join(lep.sp)
+  mutate(identifier=gsub(".txt","",xy.file)) %>% 
+  left_join(stom.sp)
 
-hindwing.pca2 <-  tibble(xy.file=basename(rownames(hindwing.pca$x)),PC1=hindwing.pca$x[,1],PC2=hindwing.pca$x[,2]) %>% 
+skull.pca2 <-  tibble(xy.file=basename(rownames(skull.pca$x)),PC1=skull.pca$x[,1],PC2=skull.pca$x[,2]) %>% 
   left_join(out.data)
-
-forewing.pca2 <-  tibble(xy.file=basename(rownames(forewing.pca$x)),PC1=forewing.pca$x[,1],PC2=forewing.pca$x[,2])%>% 
-  left_join(out.data)
-
 ```
 
-***Figure 6. Phylogenetic Tree of Lepidoptera***
+***Figure 6. Phylogenetic Tree of Stomiidae***
 
 ## Evolutionary Rates
 
 <center>
 
 ```{r,echo=FALSE}
-drops <- lep.tree$tip.label[!lep.tree$tip.label%in%unique(out.data$species)]
+drops <- stom.tree$tip.label[!stom.tree$tip.label%in%unique(out.data$species)]
 
-lep.tree2 <- drop.tip(lep.tree,drops)
+stom.tree2 <- drop.tip(stom.tree,drops)
 
-plot(lep.tree2,cex=0.5)
+plot(stom.tree2,cex=0.5)
 
-#PC1s
-hind.pc1 <- hindwing.pca2 %>% 
-    filter(species%in% lep.tree2$tip.label) %>% 
+#PC1
+skull.pc1 <- skull.pca2 %>% 
+    filter(species%in% stom.tree2$tip.label) %>% 
   group_by(species) %>% 
   summarize(PC1=mean(PC1)) %>% 
   pull
 
-names(hind.pc1) <-  hindwing.pca2%>% 
-    filter(species%in% lep.tree2$tip.label) %>% 
+names(skull.pc1) <-  skull.pca2%>% 
+    filter(species%in% stom.tree2$tip.label) %>% 
   group_by(species) %>% 
-  summarize(PC1=mean(PC1)) %>% 
-  pull(species)
-
-fore.pc1 <- forewing.pca2 %>% 
-    filter(species%in% lep.tree2$tip.label) %>% 
-   group_by(species) %>% 
-  summarize(PC1=mean(PC1)) %>% 
-  pull(PC1)
-
-names(fore.pc1) <-  forewing.pca2 %>% 
-  filter(species%in% lep.tree2$tip.label) %>% 
-     group_by(species) %>% 
   summarize(PC1=mean(PC1)) %>% 
   pull(species)
 
 #PC2s
-hind.pc2 <- hindwing.pca2 %>% 
-    filter(species%in% lep.tree2$tip.label) %>% 
+skull.pc2 <- skull.pca2 %>% 
+    filter(species%in% stom.tree2$tip.label) %>% 
   group_by(species) %>% 
   summarize(PC2=mean(PC2)) %>% 
   pull(PC2)
 
-names(hind.pc2) <-  hindwing.pca2%>% 
-    filter(species%in% lep.tree2$tip.label) %>% 
+names(hind.pc2) <-  skull.pca2%>% 
+    filter(species%in% stom.tree2$tip.label) %>% 
   group_by(species) %>%
-  summarize(PC2=mean(PC2)) %>% 
-  pull(species)
-
-fore.pc2 <- forewing.pca2 %>% 
-    filter(species%in% lep.tree2$tip.label) %>% 
-   group_by(species) %>% 
-  summarize(PC2=mean(PC2)) %>% 
-  pull(PC2)
-
-names(fore.pc2) <-  forewing.pca2 %>% 
-  filter(species%in% lep.tree2$tip.label) %>% 
-     group_by(species) %>% 
   summarize(PC2=mean(PC2)) %>% 
   pull(species)
 ```
 
-***Figure 7. Adjusted phylogenetic tree of Lepidoptera included in the study***
+***Figure 7. Adjusted phylogenetic tree of stomidoptera included in the study***
 
 ```{r, echo=FALSE}
 library(phytools)
-forePC1.BM<-brownie.lite(lep.tree2,fore.pc1*10)
-hindPC1.BM<-brownie.lite(lep.tree2,hind.pc1*10)
-forePC2.BM<-brownie.lite(lep.tree2,fore.pc2*10)
-hindPC2.BM<-brownie.lite(lep.tree2,hind.pc2*10)
+skullPC1.BM<-brownie.lite(stom.tree2,skull.pc1*10)
+skullPC2.BM<-brownie.lite(stom.tree2,skull.pc2*10)
 
-#Evolutionary rates of fore/hindwing
-forePC1.BM$sig2.single
-hindPC1.BM$sig2.single
-
-forePC2.BM$sig2.single
-hindPC2.BM$sig2.single
+#Evolutionary rates of dragonfish skull
+skullPC1.BM$sig2.single
+skullPC2.BM$sig2.single
 ```
 
 ## Shifts in Evolutionary Rates
 
 ::: {style="text-align: left"}
-The evolutionary shift was then measured to determine if any significant shift in evolutionary rate was present according to the different clades of Lepidoptera under the Brownian model.
+The evolutionary shift was then measured to determine if any significant shift in evolutionary rate was present according to the different clades of stomiidae under the Brownian model.
 :::
 
 <center>
 
 ```{r, include= FALSE}
 library(RRphylo)
-hindPC1.RR <- RRphylo(tree=lep.tree2,y=hind.pc1)
+hindPC1.RR <- RRphylo(tree=stom.tree2,y=hind.pc1)
 hindPC1.SS<- search.shift(RR=hindPC1.RR,status.type="clade")
-forePC1.RR <- RRphylo(tree=lep.tree2,y=fore.pc1)
+forePC1.RR <- RRphylo(tree=stom.tree2,y=fore.pc1)
 forePC1.SS<- search.shift(RR=forePC1.RR,status.type="clade")
 
-plot(lep.tree2)
+plot(stom.tree2)
 nodelabels(node = as.numeric(rownames(hindPC1.SS$single.clades)),text = rownames(hindPC1.SS$single.clades))
 
 hindPC1.plot <- plotShift(RR=hindPC1.RR,SS=hindPC1.SS)
@@ -346,37 +313,31 @@ plot_SS <- function(tre=NULL,SS=NULL,tax=NULL){
 ```
 
 ```{r, plot shift in evolutionary rates}
-tax.names <- readRDS("Lep_classification.RDS")
+tax.names <- readRDS("stom_classification.RDS")
 
-hindPC1.res <- plot_SS(lep.tree2,hindPC1.SS,tax = tax.names)
-forePC1.res <- plot_SS(lep.tree2,forePC1.SS,tax = tax.names)
+skullPC1.res <- plot_SS(stom.tree2,skullPC1.SS,tax = tax.names)
 
-hindPC1.res$plot
-hindPC1.res$res
-forePC1.res$plot
-forePC1.res$res
+skullPC1.res$plot
+skullPC1.res$res
 ```
 
-***Figure 8. Significant evolutionary rate found in the Lepidoptera phylogeny***
+***Figure 8. Significant evolutionary rate found in the Stomiidae phylogeny***
 
 ## Shape Evolution Correlation
 
 ::: {style="text-align: left"}
-The PC1 and PC2 data that was underwent phylogenetic independent contrast showed that the PC1 data of forewing and hindwing shape comparison had much more significant correlation compared to the PC2.
+The PC1 and PC2 data that underwent phylogenetic independent contrast showed that the PC1 data of skull shape comparison had much more significant correlation compared to the PC2.
 :::
 
-### PC1
+### PC1  #need to work on this section once have the tree data
 
 <center>
 
 ```{r, PIC for PC1, echo=FALSE}
-hindPC1.pic <- pic(hind.pc1,phy = lep.tree2)
-forePC1.pic <- pic(fore.pc1,phy = lep.tree2)
-
+skullPC1.pic <- pic(skull.pc1,phy = stom.tree2)
 
 PC1.pic <- tibble(
-  hind=hindPC1.pic,
-  fore=forePC1.pic
+  skull=skullPC1.pic
 )
 
 PC1.pic %>% 
@@ -393,8 +354,8 @@ summary(lm(hind~fore,PC1.pic))
 ### PC2
 
 ```{r, PIC for PC2, echo=FALSE}
-hindPC2.pic <- pic(hind.pc2,phy = lep.tree2)
-forePC2.pic <- pic(fore.pc2,phy = lep.tree2)
+hindPC2.pic <- pic(hind.pc2,phy = stom.tree2)
+forePC2.pic <- pic(fore.pc2,phy = stom.tree2)
 PC2.pic <- tibble(
   hind=hindPC2.pic,
   fore=forePC2.pic
@@ -411,7 +372,7 @@ summary(lm(hind~fore,PC2.pic)) #Find R-square
 
 # Discussion
 
-Various studies have been done to analyze the macroevolutionary history of Lepidopteran forewings and hindwings.
+Various studies have been done to analyze the macroevolutionary history of stomidopteran forewings and hindwings.
 One study by @le2019adaptive links morphology with natural selection, but there is little information known about rates of evolution and correlation of wing shapes.
 In this study, we aimed to answer some of these questions about evolutionary history.
 We first compared the rate of wing-shape evolution between forewings and hindwings.
