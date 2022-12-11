@@ -151,7 +151,7 @@ After acquiring the PCA data, the phylogenetic tree of Lepidoptera was filtered 
 
 ```{r, fig.show='hide', display=FALSE}
 
-lep.tree <- ape::read.tree("lep_tree2.tre")
+stom.tree <- ape::read.tree("stomiidae.tre")
 
 plot(lep.tree,cex=0.1)
 
