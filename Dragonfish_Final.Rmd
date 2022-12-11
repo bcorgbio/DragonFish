@@ -81,14 +81,14 @@ out %>%
 out.df <- vroom::vroom(f, id = "filename")
 #add species info
 out.df <- out.df %>% 
-  mutate(species=gsub("\\..+","\\1",basename(filename))) %>% 
+  mutate(specie=gsub("\\..+","\\1",basename(filename))) %>% 
   na.omit()
 #make list
 outs.l <- sapply(f,function(x) out.df %>% filter(filename==x) %>% select(X,Y) %>% as.matrix)
-#extract skull info
-wings <- gsub("\\..+","\\1",basename(names(outs.l)))
+#extract species info
+species <- gsub("\\..+","\\1",basename(names(outs.l)))
 outs <-  outs.l %>% 
-  Out(fac=list(species=species)) %>% 
+  Out(fac=list(specie=species)) %>% 
   coo_flipx() #visualize both wings uncorrected for size
 ```
 
@@ -97,88 +97,50 @@ outs <-  outs.l %>%
 ```{r, echo=FALSE, results='hide'}
 
 #Procrustes, align
-fore.min <- forewings %>% 
+skull.min <- outs %>% 
   coo_nb() %>% 
   min()
-forewings %>%
-  coo_interpolate(fore.min) %>% 
+outs %>%
+  coo_interpolate(skull.min) %>% 
   fgProcrustes() %>% 
   stack() #visualize forewings
 ```
 
-***Figure 2. Visualization of Skull using EFA after the size of the skull have been equalized***
-
-<center>
-
-```{r, display=FALSE, results='hide'}
-hind.min <- hindwings %>% 
-  coo_nb() %>% 
-  min()
-hindwings %>% 
-   coo_interpolate(hind.min) %>% 
-  coo_slide(id=1) %>% 
-   coo_align()  %>%
-   fgProcrustes() %>%
-  stack()
-```
-
-***Figure 3. Visualization of Hindwings using EFA after the size of the wings have been equalized***
+***Figure 2. Visualization of Dragonfish Skulls using EFA after the size of the skull have been equalized***
 
 <center>
 
 ```{r, include=FALSE, results='hide'}
-forewings %>%
-  coo_interpolate(fore.min) %>% 
-   coo_align()  %>%
-  fgProcrustes() %>% 
-  efourier(norm=FALSE) 
-
-hindwings %>% 
-   coo_interpolate(hind.min) %>% 
+outs %>%
+  coo_interpolate(skull.min) %>% 
    coo_align()  %>%
   fgProcrustes() %>% 
   efourier(norm=FALSE) 
 ```
 
 ::: {style="text-align: left"}
-The visualized forewings and hindwings were then processed through PCA independently from each other.
-This allowed us to see the distribution of wing shapes for the forewing and the hindwing.
+The visualized skulls were then processed through PCA.
+This allowed us to see the distribution of skull shapes.
 :::
 
 <center>
 
 ```{r, echo=FALSE, results='hide'}
-forewing.pca <- forewings %>%
-  coo_interpolate(fore.min) %>%
+skull.pca <- outs %>%
+  coo_interpolate(skull.min) %>%
    coo_align()  %>%
   coo_slide(id=1) %>% 
   fgProcrustes() %>% 
   efourier(norm=FALSE) %>% 
   PCA()
 
-hindwing.pca <-hindwings %>% 
-   coo_interpolate(hind.min) %>% 
-   coo_align()  %>%
-   coo_slide(id=1) %>% 
-  fgProcrustes() %>% 
-  efourier(norm=FALSE) %>% 
-  PCA()
-
-forewing.pca %>% 
-  plot_PCA(title = "forewings")
+skull.pca %>% 
+  plot_PCA(title = "Dragonfish Skulls")
 
 ```
 
-***Figure 4. PCA analysis of Forewings***
+***Figure 3. PCA analysis of Dragonfish Skulls***
 
-<center>
-
-```{r, echo=FALSE}
-hindwing.pca %>% 
-  plot_PCA(title = "hindwings")
-```
-
-***Figure 5. PCA analysis of Hindwings***
 
 ## Comparative Analysis
 
