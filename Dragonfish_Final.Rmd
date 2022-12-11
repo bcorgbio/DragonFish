@@ -3,6 +3,9 @@ title: "Dragonfish_Final"
 author: "Justin Lau, Christopher Peters, James Kim, John Santoianni"
 date: "2022-12-10"
 output: html_document
+editor_options: 
+  markdown: 
+    wrap: sentence
 ---
 
 ```{r setup, include=FALSE}
@@ -22,7 +25,6 @@ library(ggtree)
 ```
 
 # Introduction
-
 
 # Methods
 
@@ -79,14 +81,14 @@ out %>%
 out.df <- vroom::vroom(f, id = "filename")
 #add species info
 out.df <- out.df %>% 
-  mutate(species=gsub("XY_.+_(hindwing|forewing)\\..+","\\1",basename(filename))) %>% 
+  mutate(species=gsub("\\..+","\\1",basename(filename))) %>% 
   na.omit()
 #make list
 outs.l <- sapply(f,function(x) out.df %>% filter(filename==x) %>% select(X,Y) %>% as.matrix)
-#extract wing info
-wings <- gsub("XY_.+_(hindwing|forewing)\\..+","\\1",basename(names(outs.l)))
+#extract skull info
+wings <- gsub("\\..+","\\1",basename(names(outs.l)))
 outs <-  outs.l %>% 
-  Out(fac=list(wing=wings)) %>% 
+  Out(fac=list(species=species)) %>% 
   coo_flipx() #visualize both wings uncorrected for size
 ```
 
@@ -104,7 +106,6 @@ forewings %>%
   stack() #visualize forewings
 ```
 
-
 ***Figure 2. Visualization of Skull using EFA after the size of the skull have been equalized***
 
 <center>
@@ -120,7 +121,6 @@ hindwings %>%
    fgProcrustes() %>%
   stack()
 ```
-
 
 ***Figure 3. Visualization of Hindwings using EFA after the size of the wings have been equalized***
 
@@ -187,6 +187,7 @@ After acquiring the PCA data, the phylogenetic tree of Lepidoptera was filtered 
 :::
 
 <center>
+
 ```{r, fig.show='hide', display=FALSE}
 
 lep.tree <- ape::read.tree("lep_tree2.tre")
