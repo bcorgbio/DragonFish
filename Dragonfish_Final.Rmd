@@ -25,6 +25,12 @@ library(ggtree)
 ```
 
 # Introduction
+The Stomidae are a family of deep-sea ray finned fish and one of the oldest living species on earth. These ancient creatures have unique features such as their jaws, eyes, and gills that make them interesting targets for evolutionary biologists looking to gain insight into key development stages throughout history. As such, our research here sought to look into how head shape of this family has evolved over time. Previous research …
+Despite the importance of prior studies like these, they are limited in their ability to directly assess skull shape variables and the ecological roles of these features over evolutionary timescales and throughout lineages.  The goal of this study is to assess skull shape evolution across the stomiidae, incorporating date from 18 different species in this family. Data will be collected by characterizing the shape outline of 18 different specimen to answer the following 3 questions:
+
+1. What is the evolutionary rate for skull shape?
+2. Is there a significant evolutionary change of skull shape?
+3. Does the evolvability of the skull shape vary significantly among major our recorded lineages of Stomiidae?
 
 # Methods
 
