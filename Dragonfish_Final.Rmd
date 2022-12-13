@@ -151,7 +151,7 @@ After acquiring the PCA data, the phylogenetic tree of stomidoptera was filtered
 
 ```{r, fig.show='hide', display=FALSE}
 
-stom.tree <- ape::read.tree("stomiidae.tre")
+stom.tree <- ape::read.tree("dragonfish.tree")
 
 plot(stom.tree,cex=0.1)
 
@@ -329,7 +329,7 @@ skullPC1.res$res
 The PC1 and PC2 data that underwent phylogenetic independent contrast showed that the PC1 data of skull shape comparison had much more significant correlation compared to the PC2.
 :::
 
-### PC1  #need to work on this section once have the tree data
+### PC1 #need to work on this section once have the tree data
 
 <center>
 
