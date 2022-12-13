@@ -151,7 +151,7 @@ After acquiring the PCA data, the phylogenetic tree of stomidoptera was filtered
 
 ```{r, fig.show='hide', display=FALSE}
 
-stom.tree <- ape::read.tree("dragonfish.tree")
+stom.tree <- ape::read.tree("Stomiidae.tre")
 
 plot(stom.tree,cex=0.1)
 
@@ -163,14 +163,11 @@ plot(stom.tree,cex=0.1)
 
 stom.tree$tip.label <- gsub("_"," ",stom.tree$tip.label)
 basename(names(outs))[1:5]
-stom.sp <- read_csv("stom_image_data.csv")
-head(stom.sp)
-head(stom.sp$identifier)
+stom.tree$tip.label
 
 #
 out.data <- tibble(xy.file=basename(names(outs))) %>% 
-  mutate(identifier=gsub(".txt","",xy.file)) %>% 
-  left_join(stom.sp)
+  mutate(species=gsub(".txt","",xy.file))
 
 skull.pca2 <-  tibble(xy.file=basename(rownames(skull.pca$x)),PC1=skull.pca$x[,1],PC2=skull.pca$x[,2]) %>% 
   left_join(out.data)
@@ -209,17 +206,17 @@ skull.pc2 <- skull.pca2 %>%
   summarize(PC2=mean(PC2)) %>% 
   pull(PC2)
 
-names(hind.pc2) <-  skull.pca2%>% 
+names(skull.pc2) <-  skull.pca2%>% 
     filter(species%in% stom.tree2$tip.label) %>% 
   group_by(species) %>%
   summarize(PC2=mean(PC2)) %>% 
   pull(species)
 ```
 
-***Figure 7. Adjusted phylogenetic tree of stomidoptera included in the study***
+***Figure 7. Adjusted phylogenetic tree of stomiidae included in the study***
 
 ```{r, echo=FALSE}
-library(phytools)
+
 skullPC1.BM<-brownie.lite(stom.tree2,skull.pc1*10)
 skullPC2.BM<-brownie.lite(stom.tree2,skull.pc2*10)
 
@@ -237,21 +234,16 @@ The evolutionary shift was then measured to determine if any significant shift i
 <center>
 
 ```{r, include= FALSE}
-library(RRphylo)
-hindPC1.RR <- RRphylo(tree=stom.tree2,y=hind.pc1)
-hindPC1.SS<- search.shift(RR=hindPC1.RR,status.type="clade")
-forePC1.RR <- RRphylo(tree=stom.tree2,y=fore.pc1)
-forePC1.SS<- search.shift(RR=forePC1.RR,status.type="clade")
+skullPC1.RR <- RRphylo(tree=stom.tree2,y=skull.pc1)
+skullPC1.SS<- search.shift(RR=skullPC1.RR,status.type="clade")
 
 plot(stom.tree2)
-nodelabels(node = as.numeric(rownames(hindPC1.SS$single.clades)),text = rownames(hindPC1.SS$single.clades))
 
-hindPC1.plot <- plotShift(RR=hindPC1.RR,SS=hindPC1.SS)
+nodelabels(node = as.numeric(rownames(skullPC1.SS$single.clades)),text = rownames(skullPC1.SS$single.clades))
 
-forePC1.plot <- plotShift(RR=hindPC1.RR,SS=hindPC1.SS)
+skullPC1.plot <- plotShift(RR=skullPC1.RR,SS=skullPC1.SS)
 
-hindPC1.plot$plotClades()
-forePC1.plot$plotClades()
+skullPC1.plot$plotClades()
 ```
 
 ```{r, Define funtion, include= FALSE}
