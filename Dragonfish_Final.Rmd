@@ -234,7 +234,7 @@ The evolutionary shift was then measured to determine if any significant shift i
 <center>
 
 ```{r, include= FALSE}
-skullPC1.RR <- RRphylo(tree=stom.tree2,y=skull.pc1)
+skullPC1.RR <- RRphylo(tree=stom.tree2,y=skull.pc2)
 skullPC1.SS<- search.shift(RR=skullPC1.RR,status.type="clade")
 
 plot(stom.tree2)
