@@ -27,7 +27,7 @@ library(ggtree)
 
 # Introduction
 
-Stomiidae is a family of deep-sea ray-finned fish and one of the oldest living species on earth. These ancient creatures have unique features such as their jaws, eyes, and gills that make them interesting targets for evolutionary biologists looking to gain insight into key development stages throughout history. As such, our research here sought to look into how the head shape of this family has evolved over time. Previous research that has been done into the family of Stomiidae is relatively limited. However, one such study done by @sutton1996species had a focus on uniquely preserved as well as novel features such as the pectoral girdle and vertebral column. In the findings, it was suggested that by the nature of the larger prey Stomiidae target, these anatomical skull features have proven to be beneficial in physically allowing for the engulfing and consumption of these foodstuffs. Despite the importance of prior studies like that of @sutton1996species, they remain limited in their ability to directly assess skull shape variables and the ecological roles of these features over evolutionary timescales and throughout lineages. As such, the goal of our study is to assess skull shape evolution across the Stomiidae, incorporating data from 18 different species in this family. Data will be collected by characterizing the shape outline of the different specimens to answer the following 3 questions:
+Stomiidae is a family of deep-sea ray-finned fish and one of the oldest living species on earth. One of the most unique features of these fish are their skulls as its shape and specific features tend to vary from species to species. As such, our research here sought to look into how the head shape of this family has evolved over time. Previous research that has been done into the family of Stomiidae is relatively limited. However, one such study done by @sutton1996species had a focus on uniquely preserved as well as novel features such as the pectoral girdle and vertebral column. In the findings, it was suggested that by the nature of the larger prey Stomiidae target, these anatomical skull features have proven to be beneficial in physically allowing for the engulfing and consumption of their prey. Another study performed by @kenaley2010comparative have found that other features that some stormiidae contain such as their cephalic photophore was the result of parallel evolution. Similar studies performed by @fink1985phylogenetic performed a phylogenetic comparison study on the specific features of different stormiidae craniums, but it did not explore the if any significance of the rate of evolutionary change could be found that resulted in these diverse skull shapes. As such, the goal of our study is to assess skull shape evolution across the Stomiidae, incorporating data from 18 different species in this family. Data will be collected by characterizing the shape outline of the different specimens to answer the following 3 questions:
 
 1. What is the evolutionary rate for skull shape?
 2. Is there a significant evolutionary change of skull shape?
@@ -47,7 +47,7 @@ The file names of each species were also identified using the identifier data pr
 
 The PC data was added to the identified species data accordingly.
 The phylogeny tree was modified to only include the species that were identified and had a PCA data.
-From here, the dragonfish skull PC1 and PC2 were separated in different variable under the Brownian Motion.
+From here, the dragonfish skull PC data was separated in different variable under the Brownian Motion.
 
 To determine the evolutionary rate, "RRphylo" package was used to determine the rate of evolution based on skull shape and from there, any statistically significant shift in shape evolution based on the Dragon fish clades were identified.
 
@@ -385,7 +385,7 @@ PIC analysis on fore- and hindwing PC1 showed significant correlation (R-squared
 
 Justin - File Formatting, Code, Methods
 
-James -
+James - Intro, Methods, Image Analysis, Bibliography
 
 Chris -
 
