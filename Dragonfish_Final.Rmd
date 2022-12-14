@@ -48,7 +48,7 @@ The rate of the significant evolutionary shift was identified along with the nam
 
 The phylogenetic independent contrast was performed on the PC datas to separate the original tip data independent of each other.
 
-The PC values of forewing and hindwing data were then compared via linear model and analyzed to see if statistically significant value existed.
+The PC values of skulls were then compared via linear model and analyzed to see if statistically significant value existed.
 
 # Results
 
