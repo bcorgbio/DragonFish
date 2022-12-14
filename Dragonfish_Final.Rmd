@@ -3,6 +3,7 @@ title: "Dragonfish_Final"
 author: "Justin Lau, Christopher Peters, James Kim, John Santoianni"
 date: "2022-12-10"
 output: html_document
+bibliography: Bibliography.bib
 editor_options: 
   markdown: 
     wrap: sentence
