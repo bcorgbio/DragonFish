@@ -26,6 +26,12 @@ library(ggtree)
 
 # Introduction
 
+Stomiidae is a family of deep-sea ray-finned fish and one of the oldest living species on earth. These ancient creatures have unique features such as their jaws, eyes, and gills that make them interesting targets for evolutionary biologists looking to gain insight into key development stages throughout history. As such, our research here sought to look into how the head shape of this family has evolved over time. Previous research that has been done into the family of Stomiidae is relatively limited. However, one such study done by @schnell2008evolution had a focus on uniquely preserved as well as novel features such as the pectoral girdle and vertebral column. In the findings, it was suggested that by the nature of the larger prey Stomiidae target, these anatomical skull features have proven to be beneficial in physically allowing for the engulfing and consumption of these foodstuffs. Despite the importance of prior studies like that of @schnell2008evolution, they remain limited in their ability to directly assess skull shape variables and the ecological roles of these features over evolutionary timescales and throughout lineages. As such, the goal of our study is to assess skull shape evolution across the Stomiidae, incorporating data from 18 different species in this family. Data will be collected by characterizing the shape outline of the different specimens to answer the following 3 questions:
+
+1. What is the evolutionary rate for skull shape?
+2. Is there a significant evolutionary change of skull shape?
+3. Does the evolvability of the skull shape vary significantly among our major recorded lineages of Stomiidae?
+
 # Methods
 
 Images of various species of Dragonfish were digitized using FIJI.
