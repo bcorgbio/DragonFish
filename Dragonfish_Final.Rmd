@@ -28,11 +28,20 @@ library(ggfortify)
 
 # Introduction
 
-Stomiidae is a family of deep-sea ray-finned fish and one of the oldest living species on earth. One of the most unique features of these fish are their skulls as its shape and specific features tend to vary from species to species. As such, our research here sought to look into how the head shape of this family has evolved over time. Previous research that has been done into the family of Stomiidae is relatively limited. However, one such study done by @sutton1996species had a focus on uniquely preserved as well as novel features such as the pectoral girdle and vertebral column. In the findings, it was suggested that by the nature of the larger prey Stomiidae target, these anatomical skull features have proven to be beneficial in physically allowing for the engulfing and consumption of their prey. Another study performed by @kenaley2010comparative have found that other features that some stomiidae contain such as their cephalic photophore was the result of parallel evolution. Similar studies performed by @fink1985phylogenetic performed a phylogenetic comparison study on the specific features of different stormiidae craniums, but it did not explore the if any significance of the rate of evolutionary change could be found that resulted in these diverse skull shapes. As such, the goal of our study is to assess skull shape evolution across the Stomiidae, incorporating data from 18 different species in this family. Data will be collected by characterizing the shape outline of the different specimens to answer the following 3 questions:
+Stomiidae is a family of deep-sea ray-finned fish and one of the oldest living species on earth.
+One of the most unique features of these fish are their skulls as its shape and specific features tend to vary from species to species.
+As such, our research here sought to look into how the head shape of this family has evolved over time.
+Previous research that has been done into the family of Stomiidae is relatively limited.
+However, one such study done by @sutton1996species had a focus on uniquely preserved as well as novel features such as the pectoral girdle and vertebral column.
+In the findings, it was suggested that by the nature of the larger prey Stomiidae target, these anatomical skull features have proven to be beneficial in physically allowing for the engulfing and consumption of their prey.
+Another study performed by @kenaley2010comparative have found that other features that some stomiidae contain such as their cephalic photophore was the result of parallel evolution.
+Similar studies performed by @fink1985phylogenetic performed a phylogenetic comparison study on the specific features of different stormiidae craniums, but it did not explore the if any significance of the rate of evolutionary change could be found that resulted in these diverse skull shapes.
+As such, the goal of our study is to assess skull shape evolution across the Stomiidae, incorporating data from 18 different species in this family.
+Data will be collected by characterizing the shape outline of the different specimens to answer the following 3 questions:
 
-1. What is the evolutionary rate for skull shape?
-2. Is there a significant evolutionary change of skull shape?
-3. Does the evolvability of the skull shape vary significantly among our major recorded lineages of Stomiidae?
+1.  What is the evolutionary rate for skull shape?
+2.  Is there a significant evolutionary change of skull shape?
+3.  Does the evolvability of the skull shape vary significantly among our major recorded lineages of Stomiidae?
 
 # Methods
 
@@ -179,6 +188,7 @@ skull.pca2 <-  tibble(xy.file=basename(rownames(skull.pca$x)),PC1=skull.pca$x[,1
   left_join(out.data)
 
 ```
+
 ***Figure 6. Phylogenetic Tree of Stomiidae***
 
 ## Evolutionary Rates
@@ -223,7 +233,7 @@ plot(stom.tree2,cex=0.5)
 
 ***Figure 7. Adjusted phylogenetic tree of stomiidae included in the study***
 
-```{r, echo=FALSE}
+```{r, include=T}
 
 skullPC1.BM<-brownie.lite(stom.tree2,skull.pc1*100)
 skullPC2.BM<-brownie.lite(stom.tree2,skull.pc2*100)
@@ -241,18 +251,22 @@ The evolutionary shift was then measured to determine if any significant shift i
 
 <center>
 
-```{r, include= FALSE}
+```{r,include = T}
 skullPC1.RR <- RRphylo(tree=stom.tree2,y=skull.pc2)
 skullPC1.SS<- search.shift(RR=skullPC1.RR,status.type="clade")
+```
 
+
+```{r, include = F}
 plot(stom.tree2)
-
 nodelabels(node = as.numeric(rownames(skullPC1.SS$single.clades)),text = rownames(skullPC1.SS$single.clades))
+```
 
+```{r,include = T}
 skullPC1.plot <- plotShift(RR=skullPC1.RR,SS=skullPC1.SS)
-
 skullPC1.plot$plotClades()
 ```
+
 ***Figure 8. Significant evolutionary rate found in the Stomiidae phylogeny***
 
 ## Shape Evolution Correlation
@@ -260,7 +274,6 @@ skullPC1.plot$plotClades()
 ::: {style="text-align: left"}
 The PC1 and PC2 data that underwent phylogenetic independent contrast showed that the PC1 data of skull shape comparison had much more significant correlation compared to the PC2.
 :::
-
 
 # Discussion
 
