@@ -23,11 +23,12 @@ library(phytools)
 library(wesanderson)
 library(RRphylo)
 library(ggtree)
+library(ggfortify)
 ```
 
 # Introduction
 
-Stomiidae is a family of deep-sea ray-finned fish and one of the oldest living species on earth. One of the most unique features of these fish are their skulls as its shape and specific features tend to vary from species to species. As such, our research here sought to look into how the head shape of this family has evolved over time. Previous research that has been done into the family of Stomiidae is relatively limited. However, one such study done by @sutton1996species had a focus on uniquely preserved as well as novel features such as the pectoral girdle and vertebral column. In the findings, it was suggested that by the nature of the larger prey Stomiidae target, these anatomical skull features have proven to be beneficial in physically allowing for the engulfing and consumption of their prey. Another study performed by @kenaley2010comparative have found that other features that some stormiidae contain such as their cephalic photophore was the result of parallel evolution. Similar studies performed by @fink1985phylogenetic performed a phylogenetic comparison study on the specific features of different stormiidae craniums, but it did not explore the if any significance of the rate of evolutionary change could be found that resulted in these diverse skull shapes. As such, the goal of our study is to assess skull shape evolution across the Stomiidae, incorporating data from 18 different species in this family. Data will be collected by characterizing the shape outline of the different specimens to answer the following 3 questions:
+Stomiidae is a family of deep-sea ray-finned fish and one of the oldest living species on earth. One of the most unique features of these fish are their skulls as its shape and specific features tend to vary from species to species. As such, our research here sought to look into how the head shape of this family has evolved over time. Previous research that has been done into the family of Stomiidae is relatively limited. However, one such study done by @sutton1996species had a focus on uniquely preserved as well as novel features such as the pectoral girdle and vertebral column. In the findings, it was suggested that by the nature of the larger prey Stomiidae target, these anatomical skull features have proven to be beneficial in physically allowing for the engulfing and consumption of their prey. Another study performed by @kenaley2010comparative have found that other features that some stomiidae contain such as their cephalic photophore was the result of parallel evolution. Similar studies performed by @fink1985phylogenetic performed a phylogenetic comparison study on the specific features of different stormiidae craniums, but it did not explore the if any significance of the rate of evolutionary change could be found that resulted in these diverse skull shapes. As such, the goal of our study is to assess skull shape evolution across the Stomiidae, incorporating data from 18 different species in this family. Data will be collected by characterizing the shape outline of the different specimens to answer the following 3 questions:
 
 1. What is the evolutionary rate for skull shape?
 2. Is there a significant evolutionary change of skull shape?
@@ -142,7 +143,7 @@ skull.pca <- outs %>%
   PCA()
 
 skull.pca %>% 
-  plot_PCA(title = "Dragonfish Skulls")
+  plot_PCA(title = "Dragonfish Skulls", labelpoints = T) 
 
 ```
 
@@ -159,9 +160,7 @@ After acquiring the PCA data, the phylogenetic tree of stomidoptera was filtered
 ```{r, fig.show='hide', display=FALSE}
 
 stom.tree <- ape::read.tree("Stomiidae.tre")
-
 plot(stom.tree,cex=0.1)
-
 ```
 
 ```{r, echo=FALSE, results='hide'}
@@ -178,8 +177,8 @@ out.data <- tibble(xy.file=basename(names(outs))) %>%
 
 skull.pca2 <-  tibble(xy.file=basename(rownames(skull.pca$x)),PC1=skull.pca$x[,1],PC2=skull.pca$x[,2]) %>% 
   left_join(out.data)
-```
 
+```
 ***Figure 6. Phylogenetic Tree of Stomiidae***
 
 ## Evolutionary Rates
@@ -191,7 +190,7 @@ drops <- stom.tree$tip.label[!stom.tree$tip.label%in%unique(out.data$species)]
 
 stom.tree2 <- drop.tip(stom.tree,drops)
 
-plot(stom.tree2,cex=0.5)
+
 
 #PC1
 skull.pc1 <- skull.pca2 %>% 
@@ -218,14 +217,16 @@ names(skull.pc2) <-  skull.pca2%>%
   group_by(species) %>%
   summarize(PC2=mean(PC2)) %>% 
   pull(species)
+
+plot(stom.tree2,cex=0.5)
 ```
 
 ***Figure 7. Adjusted phylogenetic tree of stomiidae included in the study***
 
 ```{r, echo=FALSE}
 
-skullPC1.BM<-brownie.lite(stom.tree2,skull.pc1*10)
-skullPC2.BM<-brownie.lite(stom.tree2,skull.pc2*10)
+skullPC1.BM<-brownie.lite(stom.tree2,skull.pc1*100)
+skullPC2.BM<-brownie.lite(stom.tree2,skull.pc2*100)
 
 #Evolutionary rates of dragonfish skull
 skullPC1.BM$sig2.single
@@ -252,74 +253,6 @@ skullPC1.plot <- plotShift(RR=skullPC1.RR,SS=skullPC1.SS)
 
 skullPC1.plot$plotClades()
 ```
-
-```{r, Define funtion, include= FALSE}
-
-
-plot_SS <- function(tre=NULL,SS=NULL,tax=NULL){
-  
-
-  nodes <- as.numeric(rownames(SS$single.clades))
-  
-  pal <- wes_palette("Zissou1",n=length(nodes))
-  sp <- list()
-  for(i in nodes){
-    sp.i <- extract.clade(tre,i)$tip.label
-    
-    #print(head(tax))
-    sub.names <- lapply(tax,function(x) x[x%in%sp.i]) 
-    
-    in.clades <- lapply(sub.names,function(x) length(x)>0) 
-    all.of.clade <- lapply(sub.names,function(x) all(sapply(sp.i,function(z) z%in%x))) 
-    
-    high.clade <- names(sub.names)[last(which(all.of.clade==T))]
-    all.clades <- names(sub.names)[which(in.clades==T)]
-    crown <- ""
-    if(high.clade!=last(names(sub.names))) crown <- "crown-"
-    
-    sub.clades <- NULL
-    if(length(grepl("oidea",all.clades))>0) sub.clades <- all.clades[grepl("oidea",all.clades)]
-
-    high.clade2 <- paste0(crown,high.clade,": ",paste0(sub.clades,collapse = "+"))
-    sp[[paste0(i)]] <- tibble(n=i,species=sp.i,clade=high.clade2)
-    
-  }
-
-  
-  d <- do.call(rbind,sp)%>% 
-    rename(label=species) 
-  
-  d2<- d %>% rename(clade_name=clade) 
-  
-  p <- ggtree(tre)+ scale_y_reverse()
-  
-  p$data <- p$data %>% left_join(d) %>% left_join(tibble(node=nodes,SS$single.clades) %>% mutate(shift=ifelse(rate.difference>0,"+","-")))
-  
-  p <-  p+geom_tiplab(aes(col=clade),geom="text",size=1.2)+
-    geom_cladelab(data=d2,mapping=aes(node=n,col=clade_name,label=clade_name),offset=1,size=1.5)+
-    geom_hilight(data=d2,mapping = aes(node = n,fill=clade_name),alpha = 0.01)+
-    scale_fill_manual(values = pal)+
-    scale_color_manual(values = pal)+
-    theme(legend.position = "none")+geom_nodepoint(mapping=aes(subset = shift =="-"), size=5, shape=25,fill='blue',color='blue',alpha=0.7)+
-    geom_nodepoint(mapping=aes(subset = shift =="+"), size=5, shape=24, fill='red',color='red',alpha=0.7)
-  p <- p+xlim(NA,6)
-  res <- tibble(n=nodes,SS$single.clades) %>% left_join(d %>% select(n,clade) %>% unique)
-  
-  return(list(plot=p,res=res))
-  
-}
-
-```
-
-```{r, plot shift in evolutionary rates}
-tax.names <- readRDS("stom_classification.RDS")
-
-skullPC1.res <- plot_SS(stom.tree2,skullPC1.SS,tax = tax.names)
-
-skullPC1.res$plot
-skullPC1.res$res
-```
-
 ***Figure 8. Significant evolutionary rate found in the Stomiidae phylogeny***
 
 ## Shape Evolution Correlation
@@ -328,46 +261,6 @@ skullPC1.res$res
 The PC1 and PC2 data that underwent phylogenetic independent contrast showed that the PC1 data of skull shape comparison had much more significant correlation compared to the PC2.
 :::
 
-### PC1 #need to work on this section once have the tree data
-
-<center>
-
-```{r, PIC for PC1, echo=FALSE}
-skullPC1.pic <- pic(skull.pc1,phy = stom.tree2)
-
-PC1.pic <- tibble(
-  skull=skullPC1.pic
-)
-
-PC1.pic %>% 
-  ggplot(aes(x=fore,y=hind))+geom_point()+geom_smooth(method="lm")+theme_classic()
-
-summary(lm(hind~fore,PC1.pic))
-
-```
-
-***Figure 9. Phylogenetic Independent Contrast of PC1***
-
-<center>
-
-### PC2
-
-```{r, PIC for PC2, echo=FALSE}
-hindPC2.pic <- pic(hind.pc2,phy = stom.tree2)
-forePC2.pic <- pic(fore.pc2,phy = stom.tree2)
-PC2.pic <- tibble(
-  hind=hindPC2.pic,
-  fore=forePC2.pic
-)
-
-PC2.pic %>% 
-  ggplot(aes(x=fore,y=hind))+geom_point()+geom_smooth(method="lm")+ theme_classic() #plot PIC PC2
-
-summary(lm(hind~fore,PC2.pic)) #Find R-square
-
-```
-
-***Figure 10. Phylogenetic Independent Contrast of PC2***
 
 # Discussion
 
