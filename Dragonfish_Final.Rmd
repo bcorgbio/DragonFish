@@ -94,8 +94,9 @@ out %>%
 ***Figure 1. Visualization of Dragonfish Skull Shape using EFA***
 
 ::: {style="text-align: left"}
-Figure 1 depicts the general trigonal shape of the Dragonfish skull tracing from the premaxilla to the lower eye, upper eye, parietal, to the preopercular. 
+Figure 1 depicts the general trigonal shape of the Dragonfish skull tracing from the premaxilla to the lower eye, upper eye, parietal, to the preopercular.
 :::
+
 ```{r, echo=FALSE}
 #make a large df with vroom
 out.df <- vroom::vroom(f, id = "filename")
@@ -111,9 +112,9 @@ outs <-  outs.l %>%
   Out(fac=list(specie=species)) %>% 
   coo_flipx() #visualize both wings uncorrected for size
 ```
+
 ```{r}
 ```
-
 
 ```{r}
 ```
@@ -146,7 +147,8 @@ outs %>%
 
 ::: {style="text-align: left"}
 Figure 2 depicts the visualized skulls processed through PCA.
-This method allowed us to see the distribution of skull shapes. The skulls showed minor changes in the horizontal and vertical planes, maintaining the trigonal shape. 
+This method allowed us to see the distribution of skull shapes.
+The skulls showed minor changes in the horizontal and vertical planes, maintaining the trigonal shape.
 :::
 
 <center>
@@ -168,7 +170,10 @@ skull.pca %>%
 ***Figure 3. PCA analysis of Dragonfish Skulls***
 
 ::: {style="text-align: left"}
-Figure 3 illustrates the trend in size of head shape in Stomiidae. The increase in size has allowed for advantages in seeking and engulfing prey. With this increased size, aerodynamics have decreased. The smaller heads prioritize elusivity and speed. 
+Figure 3 illustrates the trend in size of head shape in Stomiidae.
+The increase in size has allowed for advantages in seeking and engulfing prey.
+With this increased size, aerodynamics have decreased.
+The smaller heads prioritize elusivity and speed.
 :::
 
 ## Comparative Analysis
@@ -205,7 +210,7 @@ skull.pca2 <-  tibble(xy.file=basename(rownames(skull.pca$x)),PC1=skull.pca$x[,1
 ***Figure 4. Phylogenetic Tree of Stomiidae***
 
 ::: {style="text-align: left"}
-Figure 4 depicts the vast array of species present under the Stomiidae family. 
+Figure 4 depicts the vast array of species present under the Stomiidae family.
 :::
 
 ## Evolutionary Rates
@@ -251,7 +256,8 @@ plot(stom.tree2,cex=0.5)
 ***Figure 5. Adjusted phylogenetic tree of stomiidae included in the study***
 
 ::: {style="text-align: left"}
-Figure 5 depicts the correct species that were analyzed in this study spanning from the most distant relatives, Chauliodus sloani and Malacosteus niger. With this information we can track the differentiated skulls among the seperation and evolution of the species.   
+Figure 5 depicts the correct species that were analyzed in this study spanning from the most distant relatives, Chauliodus sloani and Malacosteus niger.
+With this information we can track the differentiated skulls among the seperation and evolution of the species.
 :::
 
 ```{r, include=T}
@@ -265,7 +271,10 @@ skullPC2.BM$sig2.single
 ```
 
 ::: {style="text-align: left"}
-In the chart above, evolutionary rates between PC1 and PC2 are compared. The evolutionary rate of PC1 is almost double the rate of PC2. PC1 is .07253884, evolving at a much faster rate than the latter, .04402073. One might see smaller yet more frequent changes in skull shape in PC1.
+In the chart above, evolutionary rates between PC1 and PC2 are compared.
+The evolutionary rate of PC1 is almost double the rate of PC2.
+PC1 is .07253884, evolving at a much faster rate than the latter, .04402073.
+One might see smaller yet more frequent changes in skull shape in PC1.
 :::
 
 ## Shifts in Evolutionary Rates
@@ -283,14 +292,14 @@ skullPC1.SS<- search.shift(RR=skullPC1.RR,status.type="clade")
 skullPC1.SS$single.clades
 ```
 
-
 ```{r, include = F}
 plot(stom.tree2)
 nodelabels(node = as.numeric(rownames(skullPC1.SS$single.clades)),text = rownames(skullPC1.SS$single.clades))
 ```
 
 ::: {style="text-align: left"}
-The p-value of PC1 and PC2 is .000452565. Since this number is below .05, the evolutionary rates between the two components is significant. 
+The p-value of PC1 and PC2 is .000452565.
+Since this number is below .05, the evolutionary rates between the two components is significant.
 :::
 
 ```{r,include = T}
@@ -298,12 +307,12 @@ skullPC1.plot <- plotShift(RR=skullPC1.RR,SS=skullPC1.SS)
 skullPC1.plot$plotClades()
 ```
 
-
-
 ***Figure 8. Significant evolutionary rate found in the Stomiidae phylogeny***
 
 ::: {style="text-align: left"}
-Figure 8 portrays the shift in evolutionary rates among clades in the phylogentic tree. The blue circle in the graph above depicts a sharp increase in evolutionary rate in clade 13 when the overall trend is a slight decrease. This contrast is quite significant showing a fast evolution between the two species Flagellostomias boureei and Thysanactic dentex. 
+Figure 8 portrays the shift in evolutionary rates among clades in the phylogentic tree.
+The blue circle in the graph above depicts a sharp increase in evolutionary rate in clade 13 when the overall trend is a slight decrease.
+This contrast is quite significant showing a fast evolution between the two species Flagellostomias boureei and Thysanactic dentex.
 :::
 
 ## Shape Evolution Correlation
@@ -314,22 +323,35 @@ The PC1 and PC2 data that underwent phylogenetic independent contrast showed tha
 
 # Discussion
 
-Following the studies that have been done on the phylogenetic impact on the cerebral features of the Stormiidae, this study aimed to study the correlation between evolutionary rate and the skull shape. Our study showed that using the PC1 model under the Brownian motion showed the evolutionary rate of 0.0725% compared to the PC2 model which showed evolutionary rate of 0.0440%.These results indicated that PC1 was the better model to indicate the relationshp between the the skull shape and the Stormiidae phylogeny. As seen iun Figure 8, the significant shift in the evolutionary rate occured at the clade containing the Flagellostomias Boureei and Thysanactis Dentex. Although its specific clade could not be identified through the isolated tree as we lacked the taxonomic information of Stormiidae, another study done by @kenaley2014complex have identified both Flagellostomias Boureei and Thysanactis Dentex to be part of the Melanostomiinae sub-family. To further improve our study more diverse species of stromiidae could have been examined and if the taxonomic data was avaialble we would be able to get a more accurate conclusion of where the signfiicant shift in the evolutionary rate in reference to skull shape occured.  
+Following the studies that have been done on the phylogenetic impact on the cerebral features of the Stormiidae, this study aimed to study the correlation between evolutionary rate and the skull shape.
+Our study showed that using the PC1 model under the Brownian motion showed the evolutionary rate of 0.0725% compared to the PC2 model which showed evolutionary rate of 0.0440%.These results indicated that PC1 was the better model to indicate the relationshp between the the skull shape and the Stormiidae phylogeny.
+As seen iun Figure 8, the significant shift in the evolutionary rate occured at the clade containing the Flagellostomias Boureei and Thysanactis Dentex.
+Although its specific clade could not be identified through the isolated tree as we lacked the taxonomic information of Stormiidae, another study done by @kenaley2014complex have identified both Flagellostomias Boureei and Thysanactis Dentex to be part of the Melanostomiinae sub-family.
+To further improve our study more diverse species of stromiidae could have been examined and if the taxonomic data was avaialble we would be able to get a more accurate conclusion of where the signfiicant shift in the evolutionary rate in reference to skull shape occured.
 
-&nbsp;  
-<center>![Image 1: Flagellostomias Boureei](Flagellostomias Boureei.png){width=50%}  
+ \
 
-&nbsp;  
-<center>![Image 2: Thysanactis Dentex](Thysanactis Dentex.png){width=50%}  
+<center>
 
-&nbsp;  
-<center>![Image 3: Malacosteus niger](Malacosteus niger.png){width=50%}  
+![Image 1: Flagellostomias Boureei](Flagellostomias%20Boureei.png){width="50%"}
 
-&nbsp;  
+ \
+
+<center>
+
+![Image 2: Thysanactis Dentex](Thysanactis%20Dentex.png){width="50%"}
+
+ \
+
+<center>
+
+![Image 3: Malacosteus niger](Malacosteus%20niger.png){width="50%"}
+
+ 
 
 # Author Contributions
 
-Justin - File Formatting, Code, Methods
+Justin - File Formatting, Code, Methods, Discussion, Results
 
 James - Intro, Methods, Discussion, Image Analysis, Bibliography
 
