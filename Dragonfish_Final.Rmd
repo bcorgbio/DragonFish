@@ -152,7 +152,7 @@ skull.pca <- outs %>%
   PCA()
 
 skull.pca %>% 
-  plot_PCA(title = "Dragonfish Skulls", labelpoints = T) 
+  plot_PCA(title = "Dragonfish Skulls") 
 
 ```
 
@@ -277,15 +277,7 @@ The PC1 and PC2 data that underwent phylogenetic independent contrast showed tha
 
 # Discussion
 
-Various studies have been done to analyze the macroevolutionary history of stomidopteran forewings and hindwings.
-One study by @le2019adaptive links morphology with natural selection, but there is little information known about rates of evolution and correlation of wing shapes.
-In this study, we aimed to answer some of these questions about evolutionary history.
-We first compared the rate of wing-shape evolution between forewings and hindwings.
-Evolutionary rates calculated from PC1 for forewings and hindwings differed by 35.56%, whereas evolutionary rates calculated from PC2 differed by 87.11%, indicating a significant shift in evolutionary rates between forewing and hindwing.
-Because forewing and hindwing were found to have different evolutionary rates, we examined shift in evolutionary rates of major lineages as it pertains to both hind- and forewing PC1.
-Results obtained from both agreed with each other, in that the clade Macroheterocera: Noctuoidea underwent a downward shift in wing-shape evolutionary rate.
-Next, to study fore- and hindwing shape correlation, we examined PC1 and PC2 transformed with phylogenetic information for both.
-PIC analysis on fore- and hindwing PC1 showed significant correlation (R-squared: 0.4476), whereas PIC analysis using PC2 found no significant correlation (R-squared: 0.00408).
+Following the studies that have been done on the phylogenetic impact on the cerebral features of the Stormiidae, this study aimed to study the correlation betwen evolutionary rate and the skull shape. 
 
 # Author Contributions
 
