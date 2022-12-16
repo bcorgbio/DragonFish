@@ -93,6 +93,9 @@ out %>%
 
 ***Figure 1. Visualization of Dragonfish Skull Shape using EFA***
 
+::: {style="text-align: left"}
+Figure 1 depicts the general trigonal shape of the Dragonfish skull tracing from the premaxilla to the lower eye, upper eye, parietal, to the preopercular. 
+:::
 ```{r, echo=FALSE}
 #make a large df with vroom
 out.df <- vroom::vroom(f, id = "filename")
@@ -107,6 +110,12 @@ species <- gsub("\\..+","\\1",basename(names(outs.l)))
 outs <-  outs.l %>% 
   Out(fac=list(specie=species)) %>% 
   coo_flipx() #visualize both wings uncorrected for size
+```
+```{r}
+```
+
+
+```{r}
 ```
 
 <center>
@@ -136,8 +145,8 @@ outs %>%
 ```
 
 ::: {style="text-align: left"}
-The visualized skulls were then processed through PCA.
-This allowed us to see the distribution of skull shapes.
+Figure 2 depicts the visualized skulls processed through PCA.
+This method allowed us to see the distribution of skull shapes. The skulls showed minor changes in the horizontal and vertical planes, maintaining the trigonal shape. 
 :::
 
 <center>
@@ -157,6 +166,10 @@ skull.pca %>%
 ```
 
 ***Figure 3. PCA analysis of Dragonfish Skulls***
+
+::: {style="text-align: left"}
+Figure 3 illustrates the trend in size of head shape in Stomiidae. The increase in size has allowed for advantages in seeking and engulfing prey. With this increased size, aerodynamics have decreased. The smaller heads prioritize elusivity and speed. 
+:::
 
 ## Comparative Analysis
 
@@ -189,7 +202,11 @@ skull.pca2 <-  tibble(xy.file=basename(rownames(skull.pca$x)),PC1=skull.pca$x[,1
 
 ```
 
-***Figure 6. Phylogenetic Tree of Stomiidae***
+***Figure 4. Phylogenetic Tree of Stomiidae***
+
+::: {style="text-align: left"}
+Figure 4 depicts the vast array of species present under the Stomiidae family. 
+:::
 
 ## Evolutionary Rates
 
@@ -231,7 +248,11 @@ names(skull.pc2) <-  skull.pca2%>%
 plot(stom.tree2,cex=0.5)
 ```
 
-***Figure 7. Adjusted phylogenetic tree of stomiidae included in the study***
+***Figure 5. Adjusted phylogenetic tree of stomiidae included in the study***
+
+::: {style="text-align: left"}
+Figure 5 depicts the correct species that were analyzed in this study spanning from the most distant relatives, Chauliodus sloani and Malacosteus niger. With this information we can track the differentiated skulls among the seperation and evolution of the species.   
+:::
 
 ```{r, include=T}
 
@@ -242,6 +263,10 @@ skullPC2.BM<-brownie.lite(stom.tree2,skull.pc2*100)
 skullPC1.BM$sig2.single
 skullPC2.BM$sig2.single
 ```
+
+::: {style="text-align: left"}
+In the chart above, evolutionary rates between PC1 and PC2 are compared. The evolutionary rate of PC1 is almost double the rate of PC2. PC1 is .07253884, evolving at a much faster rate than the latter, .04402073. One might see smaller yet more frequent changes in skull shape in PC1.
+:::
 
 ## Shifts in Evolutionary Rates
 
@@ -264,12 +289,22 @@ plot(stom.tree2)
 nodelabels(node = as.numeric(rownames(skullPC1.SS$single.clades)),text = rownames(skullPC1.SS$single.clades))
 ```
 
+::: {style="text-align: left"}
+The p-value of PC1 and PC2 is .000452565. Since this number is below .05, the evolutionary rates between the two components is significant. 
+:::
+
 ```{r,include = T}
 skullPC1.plot <- plotShift(RR=skullPC1.RR,SS=skullPC1.SS)
 skullPC1.plot$plotClades()
 ```
 
+
+
 ***Figure 8. Significant evolutionary rate found in the Stomiidae phylogeny***
+
+::: {style="text-align: left"}
+Figure 8 portrays the shift in evolutionary rates among clades in the phylogentic tree. The blue circle in the graph above depicts a sharp increase in evolutionary rate in clade 13 when the overall trend is a slight decrease. This contrast is quite significant showing a fast evolution between the two species Flagellostomias boureei and Thysanactic dentex. 
+:::
 
 ## Shape Evolution Correlation
 
