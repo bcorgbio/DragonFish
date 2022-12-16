@@ -317,19 +317,23 @@ The PC1 and PC2 data that underwent phylogenetic independent contrast showed tha
 Following the studies that have been done on the phylogenetic impact on the cerebral features of the Stormiidae, this study aimed to study the correlation between evolutionary rate and the skull shape. Our study showed that using the PC1 model under the Brownian motion showed the evolutionary rate of 0.0725% compared to the PC2 model which showed evolutionary rate of 0.0440%.These results indicated that PC1 was the better model to indicate the relationshp between the the skull shape and the Stormiidae phylogeny. As seen iun Figure 8, the significant shift in the evolutionary rate occured at the clade containing the Flagellostomias Boureei and Thysanactis Dentex. Although its specific clade could not be identified through the isolated tree as we lacked the taxonomic information of Stormiidae, another study done by @kenaley2014complex have identified both Flagellostomias Boureei and Thysanactis Dentex to be part of the Melanostomiinae sub-family. To further improve our study more diverse species of stromiidae could have been examined and if the taxonomic data was avaialble we would be able to get a more accurate conclusion of where the signfiicant shift in the evolutionary rate in reference to skull shape occured.  
 
 &nbsp;  
-<center>![Image: Flagellostomias Boureei. Source: Chris Kenaley / Deep-sea Fishes of the World. License: CC BY Attribution-Noncommercial-ShareAlike](https://fishesofaustralia.net.au/Images/Image/FlagellostomBoureeiChrisKenaley.jpg){width=50%}  
+<center>![Image 1: Flagellostomias Boureei](Flagellostomias Boureei.png){width=50%}  
 
 &nbsp;  
-<center>![Image: Thysanactis Dentex. Source: Pl. 2 (fig. 1) in Regan & Trewavas (1930) / Carlsberg Foundation via EOL. License: CC by Attribution](https://fishesofaustralia.net.au/images/image/ThysanactDentexType.jpg){width=50%}  
+<center>![Image 2: Thysanactis Dentex](Thysanactis Dentex.png){width=50%}  
 
 &nbsp;  
+<center>![Image 3: Malacosteus niger](Malacosteus niger.png){width=50%}  
+
+&nbsp;  
+
 # Author Contributions
 
 Justin - File Formatting, Code, Methods
 
 James - Intro, Methods, Discussion, Image Analysis, Bibliography
 
-Chris -
+Chris -Bibliography, Introduction, Image analysis
 
 John -
 
