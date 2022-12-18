@@ -347,6 +347,18 @@ To further improve our study more diverse species of stromiidae could have been 
 
 ![Image 3: Malacosteus niger](Malacosteus%20niger.png){width="50%"}
 
+ \
+
+<center>
+
+![Image 4: Idiacanthus Fasciola](Fasciola.JPG){width="50%"}
+
+ \
+
+<center>
+
+![Image 5: Echiostomas Barbatum](Barbatum.JPG){width="50%"}
+
  
 
 # Author Contributions
@@ -357,6 +369,6 @@ James - Intro, Methods, Discussion, Image Analysis, Bibliography
 
 Chris - Bibliography, Introduction, Image analysis
 
-John -
+John - Results, Methods, Editing, Bibliography 
 
 # References
