@@ -298,8 +298,8 @@ nodelabels(node = as.numeric(rownames(skullPC1.SS$single.clades)),text = rowname
 ```
 
 ::: {style="text-align: left"}
-The p-value of PC1 and PC2 is .000452565.
-Since this number is below .05, the evolutionary rates between the two components is significant.
+The rate difference of PC1 and PC2 is .000452565.
+Since the p-value is 1, the evolutionary rates between the two components is not significant, but this can be due to lack of more data.
 :::
 
 ```{r,include = T}
@@ -327,6 +327,7 @@ Following the studies that have been done on the phylogenetic impact on the cere
 Our study showed that using the PC1 model under the Brownian motion showed the evolutionary rate of 0.0725% compared to the PC2 model which showed evolutionary rate of 0.0440%.These results indicated that PC1 was the better model to indicate the relationshp between the the skull shape and the Stormiidae phylogeny.
 As seen iun Figure 8, the significant shift in the evolutionary rate occured at the clade containing the Flagellostomias Boureei and Thysanactis Dentex.
 Although its specific clade could not be identified through the isolated tree as we lacked the taxonomic information of Stormiidae, another study done by @kenaley2014complex have identified both Flagellostomias Boureei and Thysanactis Dentex to be part of the Melanostomiinae sub-family.
+The length of the tree for clade 13 that diverges to Flagellostomias Boureei and Thysanactis Dentex is longer than the rest indicating more evolutionary changes. This makes us believe that these two species must have had to develop changes quite rapidly to be able to survive. The fitness of this species depended upon their smaller jaws and agility to catch their pray. Smaller yet quicker changes evolved. On the other side of the node, developing slower are the larger jawed fish. These changes in the jaw and head shape were much more drastic, taking a longer time to develop. These larger jaws, as shown in the photos below of species such as the Idiacanthus Fasciola, developed to be more suitable for catching larger prey. 
 To further improve our study more diverse species of stromiidae could have been examined and if the taxonomic data was avaialble we would be able to get a more accurate conclusion of where the signfiicant shift in the evolutionary rate in reference to skull shape occured.
 
  \
@@ -369,6 +370,6 @@ James - Intro, Methods, Discussion, Image Analysis, Bibliography
 
 Chris - Bibliography, Introduction, Image analysis
 
-John - Results, Methods, Editing, Bibliography 
+John - Results, Discussion, Editing, Bibliography 
 
 # References
